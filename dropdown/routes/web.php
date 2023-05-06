@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\DropdownController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('dropdown', [DropdownController::class, 'index']);
+Route::post('api/fetch-constituencies', [DropdownController::class, 'fetchConstituency']);
+Route::post('api/fetch-wards', [DropdownController::class, 'fetchWard']);
