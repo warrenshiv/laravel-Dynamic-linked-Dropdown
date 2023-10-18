@@ -4,38 +4,42 @@
     <title>Dynamic Dropdowns</title>
     <!-- Include jQuery from a CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <form>
-        @csrf
-        <div class="form-group">
-            <label for="county">County</label>
-            <select class="form-control" id="county" name="county">
-                <option value="">Select County</option>
-                @foreach ($counties as $county)
-                    <option value="{{ $county->id }}">{{ $county->county_name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="subcounty">Subcounty</label>
-            <select class="form-control" id="subcounty" name="subcounty" disabled>
-                <option value="">Select Subcounty</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="ward">Ward</label>
-            <select class="form-control" id="ward" name="ward" disabled>
-                <option value="">Select Ward</option>
-            </select>
-        </div>
-    </form>
+    <div class="container mt-5">
+        <form>
+            @csrf
+            <div class="form-group">
+                <label for="county">County</label>
+                <select class="form-control" id="county" name="county">
+                    <option value="">Select County</option>
+                    @foreach ($counties as $county)
+                        <option value="{{ $county->id }}">{{ $county->county_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subcounty">Subcounty</label>
+                <select class="form-control" id="subcounty" name="subcounty" disabled>
+                    <option value="">Select Subcounty</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ward">Ward</label>
+                <select class="form-control" id="ward" name="ward" disabled>
+                    <option value="">Select Ward</option>
+                </select>
+            </div>
+        </form>
+    </div>
 
     <script>
         $(document).ready(function () {
             $('#county').change(function () {
                 var countyId = $(this).val();
-                // console.log('Selected County ID: ' + countyId);
                 if (countyId) {
                     $.ajax({
                         url: '/getSubcounties/' + countyId,
@@ -74,5 +78,8 @@
             });
         });
     </script>
+    
+    <!-- Include Bootstrap JS (jQuery should be loaded before this) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
